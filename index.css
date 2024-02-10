@@ -1,0 +1,427 @@
+:root{
+    /* Colors */
+
+    /* Primary */
+
+    --dark-gray: hsl(0, 0%, 63%);
+    --black: hsl(0, 0%, 0%);
+    --white: hsl(0, 0%, 100%);
+    --very-dark-gray: hsl(0, 0%, 27%);
+
+    /* Typography */
+
+    /* Body Copy */
+
+    --body-font: 12px;
+
+    /* Font */
+    --font-family: "League Spartan";
+    --text-light: 500;
+    --text-medium: 600;
+    --text-bold: 700;
+}
+
+*,
+*::before,
+*::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: var(--font-family), monospace; 
+}
+
+main{
+    width: 100%;
+    position: relative;
+}
+
+p{
+    color: var(--dark-gray);
+    font-weight: var(--text-light);
+    font-size: var(--body-font);
+    line-height: 150%;
+
+    @media (min-width: 992px) {
+        font-size: 15px;
+        font-weight: 400;
+    }
+}
+
+button{
+    background-color: #0000;
+    border: none;
+}
+
+.nav-bar {
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+
+    .nav-bar-wrapper{
+        padding: 2rem 1.5rem;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        transition: background-color 0.3s ease-in-out;
+
+        .logo{
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .menu{
+            list-style: none;
+            flex-grow: 1;
+            display: flex;
+            gap: 2rem;
+            justify-content: end;
+        }
+
+        @media (min-width: 600px) {
+
+            .logo{
+                flex-grow: 0;
+                text-align: center;
+            }
+
+            .harmburger-btn, .close-btn{
+                display: none;
+                background-color: green;
+            }
+            
+            .menu{
+                justify-content: start;
+                padding-left: 4rem;
+                gap: 3rem;
+                color: var(--white);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .menu{
+                gap: 4rem;
+            }
+        }
+
+    }
+
+    @media (max-width: 600px) {
+        &[data-status="collapsed"]{
+            .harmburger-btn, .logo{
+                display: inline;
+            }
+    
+            .close-btn{
+                display: none;
+            }
+            
+            .menu{
+                display: none;
+            }
+        }
+    
+        &[data-status="expanded"]{
+            min-height: 100vh;
+            background-color: rgba(0, 0, 0, 0.39);
+    
+            .nav-bar-wrapper{
+                background-color: var(--white);
+            }
+    
+            .harmburger-btn, .logo{
+                display: none;
+            }
+    
+            .close-btn{
+                display: inline;
+            }
+            
+            .menu{
+                display: flex;
+            }
+        }
+    }
+
+    @media (min-width: 992px) {
+        display: none;
+    }
+}
+
+.hero{
+    width: 100%;
+    height: auto;
+
+    .hero-image{
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+
+        .mobile-img, .desktop-img{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .mobile-img[data-status="active"]{
+            position: relative;
+        }
+
+        .mobile-img[data-status="unknown"]{
+            display: none;
+        }
+
+        .desktop-img{
+            display: none;
+        }
+
+        .desktop-img[data-status="active"]{
+            position: relative;
+        }
+
+        .desktop-img[data-status="unknown"]{
+            display: none;
+        }
+
+        .desktop-nav-bar{
+            display: none;
+        }
+
+        .slide-btns{
+            position: absolute;
+            bottom: 0.3rem;
+            right: 0;
+            z-index: 1;
+            background-color: black;
+            display: flex;
+
+            .left-btn, .right-btn{
+                background-color: var(--black);
+                padding: 0.8rem 1.5rem;
+                cursor: pointer;
+
+                svg{
+                    transform: scale(0.8);
+                    
+                    path{
+                        stroke: var(--dark-gray);
+                    }
+                }
+
+                &:hover{
+                    background-color: var(--very-dark-gray);
+                }
+            }
+        }
+
+        @media (min-width: 600px) {
+            .mobile-img{
+                display: none;
+            }
+
+            .desktop-img{
+                display: inline;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .slide-btns{
+                display: none;
+            }
+
+            .desktop-nav-bar{
+                position: absolute; 
+                display: block;
+                top: 0;
+    
+                .nav-bar-wrapper{
+                    padding: 2rem 3rem;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    transition: background-color 0.3s ease-in-out;
+            
+                    .logo{
+                        flex-grow: 1;
+                        text-align: center;
+                    }
+            
+                    .menu{
+                        list-style: none;
+                        flex-grow: 1;
+                        display: flex;
+                        justify-content: start;
+                        align-items: center;
+                        padding-left: 4rem;
+                        gap: 2.5rem;
+                        color: var(--white);
+
+                        .menu-item{
+                            display: inline-flex;
+                            flex-direction: column;
+                            gap: 4px;
+                            align-items: center;
+                            cursor: pointer;
+
+                            .hover-border{
+                                background-color: var(--white);
+                                height: 2px;
+                                width: 0%;
+                                transition: width 0.18s ease-in-out;
+                            }
+
+                            &:hover .hover-border{
+                                width: 80%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .hero-text{
+        padding: 3rem 2rem;
+
+        .hero-text-card{
+            .hero-text-heading{
+                font-size: xx-large;
+                font-weight: var(--text-medium);
+                margin-bottom: 1rem;
+            }
+    
+            .hero-text-content{
+                margin-bottom: 2rem;
+            }
+        
+            &[data-status="active"]{
+                display: block;
+            }
+
+            &[data-status="unknown"]{
+                display: none;
+            }
+        }
+
+        .shop-now-link{
+            text-decoration: none;
+            display: inline-flex;
+            gap: 1rem;
+
+            span{
+                text-transform: uppercase;
+                font-weight: var(--text-light);
+                letter-spacing: 0.6rem;
+                color: var(--black);
+            }
+
+            .arrow-icon{
+                transition: transform 0.25s ease-in-out;
+            }
+
+            &:hover{
+                span{
+                    color: var(--dark-gray);
+                }
+
+                .arrow-icon{
+                    transform: translateX(40%);
+
+                    svg path{
+                        stroke: var(--dark-gray);
+                    }
+                }
+            }
+        }
+
+        .slide-btns{
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            padding: 4rem 4rem;
+        }
+    }
+
+    @media (min-width: 992px) {
+        display: flex;
+
+        .hero-image{
+            width: 60%;
+        }
+
+        .hero-text{
+            width: 40%;
+            position: relative;
+            padding: 7rem 6rem;
+
+            .slide-btns{
+                position: absolute;
+                bottom: 0rem;
+                left: 0;
+                z-index: 1;
+                background-color: black;
+                display: flex;
+    
+                .left-btn, .right-btn{
+                    background-color: var(--black);
+                    padding: 1rem 1.5rem;
+                    cursor: pointer;
+
+                    svg{
+                        transform: scale(0.8);
+                        
+                        path{
+                            stroke: var(--dark-gray);
+                        }
+                    }
+
+                    &:hover{
+                        background-color: var(--very-dark-gray);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.about-us{
+    width: 100%;
+
+    .about-us-image{
+        width: 100%;
+    }
+
+    .about-us-text{
+        padding: 3rem 2rem;
+        font-size: var(--body-font);
+        
+        .heading{
+            font-size: var(--body-font);
+            text-transform: uppercase;
+            letter-spacing: 0.4rem;
+            word-spacing: 0.4rem;
+            font-weight: var(--text-medium);
+            margin-bottom: 1rem;
+        }
+    }
+
+    @media (min-width: 768px) {
+        display: flex;
+
+        .about-us-image, .about-us-text{
+            width: 33.33%;
+        }
+    }
+
+    @media (min-width: 992px) {
+        display: flex;
+
+        .about-us-image, .about-us-text{
+            width: auto;
+        }
+    }
+}
